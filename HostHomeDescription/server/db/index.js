@@ -3,8 +3,9 @@ const mongoUri = 'mongodb://localhost/homeDesc';
 
 const db = mongoose.connect(mongoUri, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: false
 });
+
 mongoose.connection.on('connected', () => console.log('!!! Mongoose is connected !!!'));
 
 mongoose.connection.on('error', (err) => {
