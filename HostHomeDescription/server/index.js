@@ -32,7 +32,7 @@ app.get('/rooms/:roomId', (req, res) => {
       if (!data) {
         res.status(404).send({ message: 'Unable to find the Home Description by id' });
       } else {
-        console.log('Home Description by id', data);
+        // console.log('Home Description by id', data);
         res.send(data);
       }
     })
@@ -144,6 +144,28 @@ app.get('/rooms/:roomId/amenities', (req, res) => {
     });
 });
 
-app.listen(PORT, () => {
+app.post('/rooms', (req, res) => {
+  HomeDescription.create({
+    _id: req.body._id,
+    amenities_section: {},
+    sleeping_arrangements_section: {},
+    description_section: {},
+    highlights_section: {},
+    overview_section: {},
+    title_section: {}
+  })
+  .then(data => {
+    res.send(data);
+  })
+  .catch(error => {
+    res.status(500).send({message: error.message || 'Error in creating the topic'});
+  })
+})
+
+// Commented this out for testing
+/* app.listen(PORT, () => {
   console.log(`Server listening on port http://localhost:${PORT}`);
-});
+}); */
+
+
+module.exports = app;
