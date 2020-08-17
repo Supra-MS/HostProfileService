@@ -22,8 +22,13 @@ class HostInfo extends React.Component {
     var serverUrl = 'http://localhost:3001'
     http.get(`${serverUrl}/hostInfo/${id}`)
       .then(response => {
+        console.log('GET response from the server by hostId: ', response);
+        this.setState({
+            hostInfo: response.data
+        });
       })
       .catch(err => {
+        console.log('Error receiving response from the server by hostId: ', err);
       });
   }
 
@@ -31,9 +36,37 @@ class HostInfo extends React.Component {
     let { hostInfo, superHostText, securityText, resTime } = this.state;
     return (
       <div>
-        <p>Security Text: {securityText}</p>
-        <p>{superHostText}</p>
-        <p>{resTime}</p>
+
+        {(hostInfo.host_languages) ?
+          <div>
+            <p>Languages: {hostInfo.host_languages[0]} {hostInfo.host_languages[1]} </p>
+            <p>Response Rate: {hostInfo.host_response_time} % </p>
+            <p>Response Time: {resTime}</p>
+            <p>Security Text: {securityText}</p>
+            <hr></hr>
+          </div>
+        : null}
+
+        <p>About: {hostInfo.host_about}</p>
+        <p>Co-Host: {`${hostInfo.host_has_coHost}`}</p>
+        <p>During your stay: {hostInfo.host_messages}</p>
+        {hostInfo.host_is_superHost ?
+          <div>
+          <hr></hr>
+          <p>{hostInfo.host_name} is a Superhost</p>
+          <p>{superHostText}</p>
+          </div>
+         : null}
+
+         {(hostInfo.host_verifications) ?
+          <div>
+            <p>Email: {hostInfo.host_verifications[0]}</p>
+            <p>Mobile: {hostInfo.host_verifications[1]}</p>
+            <hr></hr>
+            <p>Policy Number: STR-{hostInfo.host_verifications[2].slice(0, 7)}</p>
+          </div>
+        : null}
+        <p>{hostInfo.host_updatedAt}</p>
       </div>
     )
   }
