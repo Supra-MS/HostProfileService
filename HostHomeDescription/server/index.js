@@ -11,7 +11,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use(express.static(__dirname + '../client/dist'));
+app.use(express.static(__dirname + '/../client/dist'));
 
 app.get('/rooms', (req, res) => {
   HomeDescription.find({})
@@ -163,9 +163,9 @@ app.post('/rooms', (req, res) => {
 })
 
 // Commented this out for testing
-/* app.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Server listening on port http://localhost:${PORT}`);
-}); */
+});
 
 
 module.exports = app;
