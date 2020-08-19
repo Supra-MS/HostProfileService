@@ -31,6 +31,6 @@ app.use('/homeDesc', proxy('http://localhost:3002', {
 }));
 
 app.listen(PORT, () => {
-  console.log(`Server listening on port http://localhost:${PORT}`);
+  console.log(`Proxy Server listening on port http://localhost:${PORT}`);
 });
 
