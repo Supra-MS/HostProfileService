@@ -1,0 +1,10 @@
+logs
+*.log
+
+node_modules/
+./client/dist/
+
+package-lock.json
+.DS_Store
+../.vscode/
+./HostHomeDescription/globalConfig.json

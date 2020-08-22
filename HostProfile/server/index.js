@@ -11,9 +11,10 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.static(__dirname + '../client/dist'));
+app.use(express.static(__dirname + '/../client/dist'));
 
 app.get('/hostInfo', (req, res) => {
+  console.log('Siva🏌️‍♀️')
   HostProfile.find({})
     .then(data => {
       console.log('Successfully able to get data from Host profile DB');
@@ -26,7 +27,7 @@ app.get('/hostInfo', (req, res) => {
 });
 
 app.get('/hostInfo/:hostId', (req, res) => {
-  console.log('Parameter send by id in the req: ', req.params)
+  console.log('Parameter send by id in the req: ', req.params.hostId)
   HostProfile.findById(req.params.hostId)
     .then(data => {
       if (!data) {
