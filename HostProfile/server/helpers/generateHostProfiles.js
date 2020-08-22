@@ -1,4 +1,5 @@
 var faker = require('faker');
+var randomId = require('randomatic');
 
 var generateHostProfiles = () => {
   var hostProfiles = [];
@@ -22,7 +23,7 @@ var generateHostProfiles = () => {
       "host_has_coHost": faker.random.boolean(),
       "host_response_time": faker.random.number({'min': 98, 'max': 100}),
       "host_listings_count": faker.random.number({'min': 1, 'max': 5}),
-      "host_verifications": [faker.internet.email(), faker.phone.phoneNumber(), faker.random.uuid()],
+      "host_verifications": [faker.internet.email(), faker.phone.phoneNumber(), randomId('0000', 4)],
       "host_languages": [languages[getRandomLangIndex()], languages[getRandomLangIndex()]],
     });
 

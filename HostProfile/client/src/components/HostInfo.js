@@ -1,30 +1,56 @@
 import React from 'react';
 import http from 'axios';
+import ReadMoreReact from 'read-more-react';
+import SvgSecurity from './SvgSecurity';
+import HostListIcons from './HostListIcons';
+import HostTitle from './HostTitle';
+import CoHost from './CoHost';
+import SuperHost from './SuperHost';
+import HostVerify from './HostVerify';
 
 class HostInfo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: 1,
       hostInfo: {},
       superHostText: 'Superhosts are experienced, highly rated hosts who are committed to providing great stays for guests.',
       securityText: 'To protect your payment, never transfer money or communicate outside of the Airbnb website or app.',
-      resTime: 'within an hour'
+      resTime: 'within an hour',
+      reviewCount: 0
     }
     this.getHostInfoById = this.getHostInfoById.bind(this);
+    this.getReviewCount = this.getReviewCount.bind(this);
   }
 
   componentDidMount() {
-    this.getHostInfoById(2);
+    let randomNumber = Math.floor(Math.random() * (100));
+    // this.getHostInfoById(this.state.id);
+    this.getHostInfoById(randomNumber);
+    this.getReviewCount();
+  }
+
+  getReviewCount() {
+    http.get('https://fec-gai-hostprofile.s3-us-west-1.amazonaws.com/json/reviews.json')
+      .then(response => {
+        console.log('GET response from the AWS server: ', response);
+        let reviewCount = response.data.filter((ele, i, self) => {
+          return ele.id === this.state.id
+        })
+        console.log('reviewCount', reviewCount)
+        this.setState({
+          reviewCount: reviewCount[0].review_count
+        })
+      });
   }
 
   getHostInfoById(id) {
-    console.log('Get blog by id hit: ', id)
-    var serverUrl = 'http://localhost:3001'
+    var serverUrl = 'http://localhost:3001';
     http.get(`${serverUrl}/hostInfo/${id}`)
       .then(response => {
         console.log('GET response from the server by hostId: ', response);
         this.setState({
-            hostInfo: response.data
+          hostInfo: response.data
         });
       })
       .catch(err => {
@@ -33,44 +59,42 @@ class HostInfo extends React.Component {
   }
 
   render() {
-    let { hostInfo, superHostText, securityText, resTime } = this.state;
+    let { hostInfo, superHostText, securityText, resTime, reviewCount } = this.state;
     return (
       <div>
-
+      <hr></hr>
         {(hostInfo.host_languages) ?
           <div>
-            <p>Languages: {hostInfo.host_languages[0]} {hostInfo.host_languages[1]} </p>
-            <p>Response Rate: {hostInfo.host_response_time} % </p>
-            <p>Response Time: {resTime}</p>
-            <p>Security Text: {securityText}</p>
-            <hr></hr>
-          </div>
-        : null}
+            <HostTitle hostInfo={hostInfo} />
+            <div className="list row">
+              <div className="col-left col-md-6">
+                <HostListIcons hostInfo={hostInfo} reviewCount={reviewCount} />
+                <ReadMoreReact text={hostInfo.host_about} readMoreText="...read more" />
+                <br></br>
+                <CoHost hostInfo={hostInfo} />
+                <br></br>
 
-        <p>About: {hostInfo.host_about}</p>
-        <p>Co-Host: {`${hostInfo.host_has_coHost}`}</p>
-        <p>During your stay: {hostInfo.host_messages}</p>
-        {hostInfo.host_is_superHost ?
-          <div>
+                <div className="heading6">During your stay</div>
+                <ReadMoreReact text={hostInfo.host_messages} min={100} max={200} readMoreText="...read more" />
+                <br></br>
+
+                <SuperHost hostInfo={hostInfo} superHostText={superHostText} />
+              </div>
+
+              <div className="col-right col-md-6">
+                <HostVerify hostInfo={hostInfo} resTime={resTime} />
+                <button className="contact-host">Contact host</button>
+                <SvgSecurity />
+                <p className="security-txt">{securityText}</p>
+              </div>
+            </div>
+          </div>
+          : null}
           <hr></hr>
-          <p>{hostInfo.host_name} is a Superhost</p>
-          <p>{superHostText}</p>
-          </div>
-         : null}
-
-         {(hostInfo.host_verifications) ?
-          <div>
-            <p>Email: {hostInfo.host_verifications[0]}</p>
-            <p>Mobile: {hostInfo.host_verifications[1]}</p>
-            <hr></hr>
-            <p>Policy Number: STR-{hostInfo.host_verifications[2].slice(0, 7)}</p>
-          </div>
-        : null}
-        <p>{hostInfo.host_updatedAt}</p>
       </div>
     )
   }
 
-}
+};
 
 export default HostInfo;

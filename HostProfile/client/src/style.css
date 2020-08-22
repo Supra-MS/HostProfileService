@@ -1,4 +1,113 @@
 body {
   background-color: rgb(255, 255, 255);
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family: Nunito;
+  font-size: 19px;
+}
+
+#hostInfo {
+  margin-top: 75px;
+}
+
+.container {
+  margin-left: 150px;
+}
+
+.row {
+  margin-top: 25px;
+}
+
+img {
+  border-radius: 50%;
+  filter: grayscale(30%);
+}
+
+img, svg, .host-title {
+  display: inline-block !important;
+}
+
+.host-title {
+  position: absolute;
+  margin-left: 120px;
+  margin-top: -80px;
+  font-size: 32px;
+}
+
+.title-time {
+  position: absolute;
+  margin-left: 120px;
+  margin-top: -35px;
+  font-size: 17.5px;
+  color: rgb(136, 136, 136);
+}
+
+.co-host {
+  position: absolute;
+  margin-left: 60px;
+  margin-top: -35px;
+}
+
+svg {
+  position: relative;
+  margin-left: -15px;
+  margin-top: 50px;
+}
+
+.sec-svg {
+  position: absolute;
+  margin-top: 20px;
+  margin-left: 20px;
+  display: block !important;
+}
+
+.col-left, .col-right {
+  color: #595858;
+  padding: 20px;
+}
+
+.security-txt {
+  font-size: 15px;
+  margin-left: 60px;
+  margin-top: 20px;
+}
+
+button.read-more {
+  border: none;
+  font-weight: 900;
+}
+
+button.contact-host {
+  border: 0.01px solid black;
+  padding: 15px;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-radius: 10px;
+  font-weight: 900;
+}
+
+button.contact-host:hover, .read-more-button:hover, .host-img:hover {
+  cursor: pointer;
+}
+
+.heading6 {
+  padding: 10px 0px;
+  color: rgb(0, 0, 0);
+  font-weight: 900 !important;
+  line-height: 23px !important;
+  font-size: 21px !important;
+}
+
+.nav-li {
+  padding: 0px 10px;
+}
+
+.read-more-button {
+  display: inline-block;
+  color: black;
+  text-decoration: underline;
+  font-size: 20.5px;
+  font-weight: 900;
+}
+
+img.icons {
+  margin-top: -5px;
 }
