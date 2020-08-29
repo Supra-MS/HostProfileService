@@ -12,7 +12,7 @@ describe('Integration Testing for Home Description module server and DB', () => 
   it('Initial check for jest suite', (done) => {
     expect(1).toBe(1);
     done();
-  })
+  });
 
   test('Check 200 success status code for the existing room id ', (done) => {
     request.get('/rooms/1')
@@ -21,6 +21,17 @@ describe('Integration Testing for Home Description module server and DB', () => 
         expect(response.statusCode).toBe(200);
         expect(response.body.id).toBeDefined();
         expect(response.body.amenities_section.air_conditioning).toEqual(true);
+        done();
+      });
+  });
+
+  test('Check total number of collections in the DB to be 100', (done) => {
+    request.get('/rooms')
+      .expect('Content-Type', /json/)
+      .then((response) => {
+        expect(response.statusCode).toBe(200);
+        expect(response.body.id).toBeUndefined();
+        expect(response.body.length).toEqual(100);
         done();
       });
   });
@@ -121,12 +132,14 @@ describe('Integration Testing for Home Description module server and DB', () => 
         let filePath = path.resolve(path.join(__dirname, `/json/pricing.json`));
         fs.writeFileSync(filePath, json,  (err, data) => {
           if (err) {
-            console.log('Unable to create an image file');
+            console.log('Unable to create a json file');
           } else {
             console.log('Able to save the json file 😇', data);
           }
         })
         expect(response.statusCode).toBe(200);
+        expect(response.body.id).toBeDefined();
+        expect(response.body).toHaveProperty('service_fee', 9);
         expect(response.headers['content-type']).toEqual('application/json');
         done();
       })

@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
@@ -11,7 +12,12 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use(express.static(__dirname + '../client/dist'));
+app.use(express.static(__dirname + '/../client/dist'));
+
+/* match the ui router */
+app.get('/:id', (req, res) => {
+  res.sendFile(path.join(__dirname + './../client/dist/index.html'));
+});
 
 app.get('/rooms', (req, res) => {
   HomeDescription.find({})
@@ -163,9 +169,9 @@ app.post('/rooms', (req, res) => {
 })
 
 // Commented this out for testing
-/* app.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Server listening on port http://localhost:${PORT}`);
-}); */
+});
 
 
 module.exports = app;

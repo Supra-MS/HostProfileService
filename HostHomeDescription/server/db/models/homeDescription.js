@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const db = require('../index');
-mongoose.Promise = global.Promise;
 
 const homeDescriptionSchema = new mongoose.Schema({
   _id: {
