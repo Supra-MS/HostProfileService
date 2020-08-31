@@ -24,10 +24,14 @@ class HostInfo extends React.Component {
   }
 
   componentDidMount() {
-    let randomNumber = Math.floor(Math.random() * (100));
-    // this.getHostInfoById(this.state.id);
-    this.getHostInfoById(randomNumber);
-    this.getReviewCount();
+    let queryString = window.location.search;
+    console.log('query string', queryString)
+    if (!queryString.length) {
+      let pathname = window.location.pathname.split('/').pop();
+      this.getHostInfoById(pathname);
+    } else {
+      this.getHostInfoById(queryString.split('?').pop());
+    }
   }
 
   getReviewCount() {
@@ -45,7 +49,7 @@ class HostInfo extends React.Component {
   }
 
   getHostInfoById(id) {
-    var serverUrl = 'http://localhost:3001';
+    var serverUrl = 'http://localhost:3000';
     http.get(`${serverUrl}/hostInfo/${id}`)
       .then(response => {
         console.log('GET response from the server by hostId: ', response);

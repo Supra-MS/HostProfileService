@@ -18,13 +18,13 @@ app.use('/proxy', proxy('www.google.com', {
  }
 }));
 
-app.use('/homeDesc', proxy('http://localhost:3002', {
+app.use('/rooms', proxy('http://localhost:3002', {
   proxyReqPathResolver: function (req) {
     let parts = req.url.split('?');
     let pathname = req.url.split('/')[1];
     let queryString = parts[1];
     console.log('🏓 home', parts, queryString, '🪀', pathname)
-    return !pathname ? '/' : `/homeDesc${pathname}`;
+    return !pathname ? '/' : `/rooms/${pathname}`;
   }
 }));
 
@@ -34,7 +34,7 @@ app.use('/hostInfo', proxy('http://localhost:3006', {
     let queryString = parts[1];
     let pathname = req.url.split('/')[1];
     console.log('🏓 host', parts, queryString, '🪀', pathname)
-    return !pathname ? '/' : `/hostInfo${pathname}`;
+    return !pathname ? '/' : `/hostInfo/${pathname}`;
   }
 }));
 

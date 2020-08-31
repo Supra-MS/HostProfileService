@@ -16,7 +16,7 @@ body {
   margin-top: 25px;
 }
 
-img {
+img.host-img {
   border-radius: 50%;
   filter: grayscale(30%);
 }

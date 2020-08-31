@@ -3,7 +3,7 @@ var randomId = require('randomatic');
 
 var generateHostProfiles = () => {
   var hostProfiles = [];
-  var localhost = 'http://localhost:3001';
+  var localhost = 'http://localhost:3006';
   var languages = ['English', 'French', 'Spanish', 'Chinese', 'German', 'Tamil', 'Russian', 'Japanese'];
 
   var getRandomLangIndex = () => {

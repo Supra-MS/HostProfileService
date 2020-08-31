@@ -25,18 +25,29 @@ class HomeDescription extends React.Component {
 
   componentDidMount() {
     /* this.getHostInfoById(this.props.match.params.id); */
+    let queryString = window.location.search;
+    console.log('query string home', queryString)
+    if (!queryString.length) {
+      let pathname = window.location.pathname.split('/').pop();
+      console.log('/ home')
+      this.getHostInfoById(pathname);
+      this.getHomeDescById(pathname);
+    } else {
+      console.log('? home')
+      this.getHostInfoById(queryString.split('?').pop());
+      this.getHomeDescById(queryString.split('?').pop());
+    }
+    // console.log('props: ', this.props)
+    // let pathname = this.props.location.pathname.split('/').pop();
 
-    console.log('props: ', this.props)
-    let pathname = this.props.location.pathname.split('/').pop();
-
-    this.getHostInfoById(pathname);
-    this.getHostInfoById(this.state.id);
+    // this.getHostInfoById(pathname);
+    // this.getHostInfoById(this.state.id);
 
   }
 
   getHostInfoById(id) {
     console.log('host id: ', id)
-    var serverUrl = 'http://localhost:3006'
+    var serverUrl = 'http://localhost:3000'
     http.get(`${serverUrl}/hostInfo/${id}`)
       .then(response => {
         console.log('GET response from the server by hostInfo Id: ', response.data);
@@ -50,16 +61,16 @@ class HomeDescription extends React.Component {
         });
         return hostInfoObj;
       })
-      .then((response) => {
-        this.getHomeDescById(response.hostId);
-      })
+      // .then((response) => {
+      //   this.getHomeDescById(response.hostId);
+      // })
       .catch(err => {
         console.log('Error receiving response from the server by hostInfo Id: ', err);
       });
   }
 
   getHomeDescById(id) {
-    var serverUrl = 'http://localhost:3002'
+    var serverUrl = 'http://localhost:3000'
     http.get(`${serverUrl}/rooms/${id}`)
       .then(response => {
         console.log('GET response from the server by homeDesc Id: ', response.data);

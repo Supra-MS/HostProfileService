@@ -1,11 +1,12 @@
 const express = require('express');
+const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const HostProfile = require('./db/models/hostProfile');
 
 const app = express();
-const PORT = 3001;
+const PORT = 3006;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -13,8 +14,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(__dirname + '/../client/dist'));
 
+/* match the ui router */
+app.get('/:id', (req, res) => {
+  res.sendFile(path.join(__dirname + './../client/dist/index.html'));
+});
+
 app.get('/hostInfo', (req, res) => {
-  console.log('Siva🏌️‍♀️')
   HostProfile.find({})
     .then(data => {
       console.log('Successfully able to get data from Host profile DB');
