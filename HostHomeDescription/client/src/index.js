@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import HomeDesc from './components/HomeDescription';
+// import HomeDescription from './components/HomeDescription';
+import MainHomeDescription from './components/MainHomeDesc';
 require('./style.css');
 
-ReactDOM.render(<HomeDesc />, document.getElementById('homeDesc'));
+ReactDOM.render(<MainHomeDescription />, document.getElementById('homeDesc'));
 
