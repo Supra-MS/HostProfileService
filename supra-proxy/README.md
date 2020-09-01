@@ -1,1 +1,0 @@
-#### Proxy server for WaterBnB product detail page.
