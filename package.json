@@ -4,12 +4,19 @@
   "description": "WaterBnB Host Profile Component Service",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --watch",
     "start": "nodemon server/index.js",
     "dev:react": "webpack -d --watch",
     "react": "webpack-dev-server --open=8081",
     "seedDb": "node ./server/db/seed.js",
     "dev:json": "json-server ./server/helpers/hostProfile.json"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "verbose": true
   },
   "repository": {
     "type": "git",
@@ -29,6 +36,8 @@
     "@babel/preset-react": "^7.10.4",
     "babel-loader": "^8.1.0",
     "css-loader": "^4.2.1",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.4",
     "eslint": "^7.2.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-plugin-import": "^2.22.0",
@@ -38,14 +47,20 @@
     "faker": "^4.1.0",
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.3.0",
+    "jest": "^26.4.2",
+    "jest-enzyme": "^7.1.2",
+    "jsdom": "16.4.0",
+    "jsdom-global": "3.0.2",
     "json-server": "^0.16.1",
     "moment": "^2.27.0",
+    "react-test-renderer": "^16.13.1",
     "style-loader": "^1.2.1",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "@shelf/jest-mongodb": "^1.2.3",
     "axios": "^0.19.2",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
@@ -54,7 +69,8 @@
     "randomatic": "^3.1.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "read-more-react": "^1.0.10"
+    "read-more-react": "^1.0.10",
+    "sinon": "^9.0.3"
   },
   "babel": {
     "presets": [
@@ -62,5 +78,5 @@
       "@babel/preset-react"
     ]
   },
-  "proxy": "http://localhost:3006"
+  "proxy": "http://localhost:3000"
 }
