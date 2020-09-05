@@ -28,7 +28,12 @@ class HostInfo extends React.Component {
     console.log('query string', queryString)
     if (!queryString.length) {
       let pathname = window.location.pathname.split('/').pop();
-      this.getHostInfoById(pathname);
+      if (pathname === undefined) {
+        console.log('pathname')
+        this.getHostInfoById(1);
+      } else {
+        this.getHostInfoById(pathname);
+      }
     } else {
       this.getHostInfoById(queryString.split('?').pop());
     }
@@ -49,7 +54,7 @@ class HostInfo extends React.Component {
   }
 
   getHostInfoById(id) {
-    var serverUrl = 'http://localhost:3000';
+    var serverUrl = 'http://ec2-54-215-129-94.us-west-1.compute.amazonaws.com:3000';
     http.get(`${serverUrl}/hostInfo/${id}`)
       .then(response => {
         console.log('GET response from the server by hostId: ', response);
