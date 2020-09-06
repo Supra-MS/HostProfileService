@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
-const mongoUri = 'mongodb://localhost/hostInfo';
+// const mongoUri = 'mongodb://localhost/hostInfo';
+const dbName = 'hostProfileDB';
+const mongoUri = `mongodb+srv://admin:admin@cluster0.9j0yc.mongodb.net/${dbName}`;
 
 const db = mongoose.connect(mongoUri, {
   useNewUrlParser: true,
@@ -16,3 +18,8 @@ mongoose.connection.on('disconnected', () => {
 });
 
 module.exports = db;
+
+
+
+
+

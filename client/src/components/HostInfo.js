@@ -25,11 +25,9 @@ class HostInfo extends React.Component {
 
   componentDidMount() {
     let queryString = window.location.search;
-    console.log('query string', queryString)
     if (!queryString.length) {
       let pathname = window.location.pathname.split('/').pop();
       if (pathname === undefined) {
-        console.log('pathname')
         this.getHostInfoById(1);
       } else {
         this.getHostInfoById(pathname);
