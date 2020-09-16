@@ -9,7 +9,6 @@ const insertSampleHostProfiles = function() {
   HostProfile.create(sampleHostProfiles)
     .then(() => {
       console.log('Successfully inserted 100 sample host profiles');
-      // db.disconnect();
     });
 };
 
