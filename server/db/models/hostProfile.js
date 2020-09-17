@@ -9,6 +9,7 @@ const hostProfileSchema = new mongoose.Schema({
   },
   host_url: String,
   host_name: String,
+  cohost_name: String,
   host_about: String,
   host_messages: String,
   host_identity_verified: Boolean,

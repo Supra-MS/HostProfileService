@@ -82,6 +82,7 @@ button.contact-host {
   padding-right: 30px;
   border-radius: 10px;
   font-weight: 900;
+  background-color: white;
 }
 
 button.contact-host:hover, .read-more-button:hover, .host-img:hover {
