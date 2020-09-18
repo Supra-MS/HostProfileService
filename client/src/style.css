@@ -12,10 +12,6 @@ body {
   margin-left: 150px;
 }
 
-.row {
-  margin-top: 25px;
-}
-
 img.host-img {
   border-radius: 50%;
   filter: grayscale(30%);
@@ -30,6 +26,7 @@ img, svg, .host-title {
   margin-left: 120px;
   margin-top: -80px;
   font-size: 32px;
+  color: black;
 }
 
 .title-time {
@@ -46,10 +43,10 @@ img, svg, .host-title {
   margin-top: -35px;
 }
 
-svg {
-  position: relative;
-  margin-left: -15px;
+#super-host {
   margin-top: 50px;
+  margin-left: -15px;
+  position: relative;
 }
 
 .sec-svg {
