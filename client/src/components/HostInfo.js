@@ -7,6 +7,7 @@ import HostTitle from './HostTitle';
 import CoHost from './CoHost';
 import SuperHost from './SuperHost';
 import HostVerify from './HostVerify';
+import Contact from './Contact';
 
 // var serverUrl = 'http://ec2-54-215-129-94.us-west-1.compute.amazonaws.com:3000';
 var serverUrl = 'http://localhost:3006';
@@ -123,7 +124,7 @@ class HostInfo extends React.Component {
 
               <div className="col-right col-md-6">
                 <HostVerify hostInfo={hostInfo} resTime={resTime} />
-                <button className="contact-host">Contact host</button>
+                <Contact />
                 <SvgSecurity />
                 <p className="security-txt">{securityText}</p>
               </div>

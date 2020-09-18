@@ -100,7 +100,7 @@ button.contact-host:hover, .read-more-button:hover, .host-img:hover {
 
 .read-more-button {
   display: inline-block;
-  color: black;
+  color: rgb(53, 52, 52);
   text-decoration: underline;
   font-size: 20.5px;
   font-weight: 900;
@@ -108,4 +108,137 @@ button.contact-host:hover, .read-more-button:hover, .host-img:hover {
 
 img.icons {
   margin-top: -5px;
+}
+
+.modal-content {
+  width: 130% !important;
+}
+
+.modal-title {
+  color: rgb(0, 0, 0);
+  font-size: 27px;
+  font-weight: bolder;
+  text-align: center !important;
+  margin-left: 220px;
+}
+
+.css-e56m7-control {
+  border-radius: 10px !important;
+  background: white;
+};
+
+.social-auth {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+}
+
+.continue-btn {
+  background-color: rgb(255,90,95);
+  font-size: medium;
+  border: none;
+}
+
+.continue-btn:hover {
+  background-color: rgb(255,90,95);
+  font-size: medium;
+  color: #f5f1f1;
+  border: none;
+}
+
+.social-btn {
+  background-color: white;
+  font-size: medium;
+  border: none;
+  color: black;
+}
+
+.social-btn:hover {
+  background-color: white;
+  font-size: medium;
+  color: black;
+  border: none;
+}
+
+.modal-p {
+  margin-top: 12px;
+  color: #bababa;
+  font-size: smaller;
+}
+
+.modal-p-login {
+  margin-left: 10px;
+  margin-top: 17px;
+  color: #727272;
+  font-size: medium;
+}
+
+.log-in-btn {
+  color: black;
+  background-color: white;
+  text-decoration: underline;
+  border: none;
+}
+
+.ctrl-style-p {
+  color: #bababa;
+  font-size: 18px;
+  margin: 0px;
+}
+
+.social-logo {
+  object-fit: contain;
+  display: flex;
+  margin: 10px;
+}
+
+.txt-container {
+  max-width: 100%;
+  display: flex;
+  flex: 1;
+  padding: 8px;
+  align-items: center;
+  border: 2px solid #cdcdcd;
+  border-radius: 10px;
+  margin: 15px;
+}
+
+.txt-container:hover {
+  background-color: white;
+  font-size: medium;
+  color: black;
+  border: 2px solid black;
+  border-radius: 10px;
+  margin: 15px;
+}
+
+.fb {
+  height: 20px;
+  width: 20px;
+  color: #457af1;
+}
+
+.divider {
+	display: flex;
+	flex-basis: 100%;
+	align-items: center;
+	color: rgba(0, 0, 0, 0.6);
+	margin: 20px 0px;
+}
+
+.divider::before,
+.divider::after {
+	content: "";
+	flex-grow: 1;
+	background: rgba(0, 0, 0, 0.35);
+	height: 1px;
+	font-size: 0px;
+	line-height: 0px;
+	margin: 0px 8px;
+}
+
+.form-group {
+  margin: 1rem 2px;
+  outline: none;
 }
