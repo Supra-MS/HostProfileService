@@ -9,7 +9,7 @@ import SuperHost from './SuperHost';
 import HostVerify from './HostVerify';
 import Contact from './Contact';
 
-var serverUrl = 'http://ec2-3-101-118-169.us-west-1.compute.amazonaws.com:3000';
+var serverUrl = 'http://ec2-13-56-20-100.us-west-1.compute.amazonaws.com:3000';
 // var serverUrl = 'http://localhost:3006';
 
 class HostInfo extends React.Component {
