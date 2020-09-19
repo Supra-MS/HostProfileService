@@ -8,6 +8,9 @@ import CoHost from './CoHost';
 import SuperHost from './SuperHost';
 import HostVerify from './HostVerify';
 
+var serverUrl = 'http://ec2-3-101-118-169.us-west-1.compute.amazonaws.com:3000';
+// var serverUrl = 'http://localhost:3000';
+
 class HostInfo extends React.Component {
   constructor(props) {
     super(props);
@@ -52,7 +55,6 @@ class HostInfo extends React.Component {
   }
 
   getHostInfoById(id) {
-    var serverUrl = 'http://ec2-54-215-129-94.us-west-1.compute.amazonaws.com:3000';
     http.get(`${serverUrl}/hostInfo/${id}`)
       .then(response => {
         console.log('GET response from the server by hostId: ', response);
