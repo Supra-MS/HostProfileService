@@ -7,6 +7,10 @@ import HostTitle from './HostTitle';
 import CoHost from './CoHost';
 import SuperHost from './SuperHost';
 import HostVerify from './HostVerify';
+import Contact from './Contact';
+
+// var serverUrl = 'http://ec2-54-215-129-94.us-west-1.compute.amazonaws.com:3000';
+var serverUrl = 'http://localhost:3006';
 
 var serverUrl = 'http://ec2-3-101-118-169.us-west-1.compute.amazonaws.com:3000';
 // var serverUrl = 'http://localhost:3000';
@@ -20,7 +24,9 @@ class HostInfo extends React.Component {
       superHostText: 'Superhosts are experienced, highly rated hosts who are committed to providing great stays for guests.',
       securityText: 'To protect your payment, never transfer money or communicate outside of the Airbnb website or app.',
       resTime: 'within an hour',
-      reviewCount: 0
+      reviewCount: 0,
+      hostPic: '',
+      coHostPic: '',
     }
     this.getHostInfoById = this.getHostInfoById.bind(this);
     this.getReviewCount = this.getReviewCount.bind(this);
@@ -30,57 +36,86 @@ class HostInfo extends React.Component {
     let queryString = window.location.search;
     if (!queryString.length) {
       let pathname = window.location.pathname.split('/').pop();
-      if (pathname === undefined) {
+      if (pathname === undefined || pathname === 'blank') {
         this.getHostInfoById(1);
+        this.getProfilePicture(1);
       } else {
         this.getHostInfoById(pathname);
+        this.getReviewCount(pathname);
+        this.getProfilePicture(pathname);
+        this.setState({
+          id: Number(pathname)
+        });
       }
     } else {
-      this.getHostInfoById(queryString.split('?').pop());
+      let queryStringRes = queryString.split('?').pop();
+      this.getHostInfoById(queryStringRes);
+      this.getReviewCount(queryStringRes);
+      this.getProfilePicture(queryStringRes);
+      this.setState({
+        id: Number(queryStringRes)
+      });
     }
   }
 
-  getReviewCount() {
+  getReviewCount(id) {
     http.get('https://fec-gai-hostprofile.s3-us-west-1.amazonaws.com/json/reviews.json')
       .then(response => {
-        console.log('GET response from the AWS server: ', response);
-        let reviewCount = response.data.filter((ele, i, self) => {
-          return ele.id === this.state.id
-        })
-        console.log('reviewCount', reviewCount)
-        this.setState({
-          reviewCount: reviewCount[0].review_count
-        })
+          let reviewCount = response.data.filter((ele, i, self) => {
+            return ele.id === Number(id)
+          });
+          this.setState({
+            reviewCount: reviewCount[0].review_count
+          });
+      })
+      .catch(err => {
+        console.log('Error receiving review counts from AWS s3: ');
+      });
+  }
+
+  getProfilePicture(id) {
+    http.get('https://fec-gai-hostprofile.s3-us-west-1.amazonaws.com/json/images.json')
+      .then(response => {
+          let pictures = response.data.filter((ele, i, self) => {
+            return ele.room_id === Number(id)
+          });
+          this.setState({
+            hostPic: pictures[0].host_image,
+            coHostPic: pictures[0].reviewers[0],
+          });
+      })
+      .catch(err => {
+        console.log('Error receiving profile pictures from AWS s3: ');
       });
   }
 
   getHostInfoById(id) {
     http.get(`${serverUrl}/hostInfo/${id}`)
       .then(response => {
-        console.log('GET response from the server by hostId: ', response);
+        // console.log('Successfully able to get the host info by id: ', response.data);
         this.setState({
           hostInfo: response.data
         });
       })
       .catch(err => {
-        console.log('Error receiving response from the server by hostId: ', err);
+        console.log('Error receiving response from the server by hostId: ');
       });
   }
 
   render() {
-    let { hostInfo, superHostText, securityText, resTime, reviewCount } = this.state;
+    let { hostInfo, superHostText, securityText, resTime, reviewCount, coHostPic, hostPic } = this.state;
     return (
       <div>
       <hr></hr>
-        {(hostInfo.host_languages) ?
+        {(hostInfo.host_languages) &&
           <div>
-            <HostTitle hostInfo={hostInfo} />
+            <HostTitle hostInfo={hostInfo} hostPic={hostPic} />
             <div className="list row">
               <div className="col-left col-md-6">
                 <HostListIcons hostInfo={hostInfo} reviewCount={reviewCount} />
                 <ReadMoreReact text={hostInfo.host_about} readMoreText="...read more" />
                 <br></br>
-                <CoHost hostInfo={hostInfo} />
+                <CoHost hostInfo={hostInfo} coHostPic={coHostPic} />
                 <br></br>
 
                 <div className="heading6">During your stay</div>
@@ -92,14 +127,14 @@ class HostInfo extends React.Component {
 
               <div className="col-right col-md-6">
                 <HostVerify hostInfo={hostInfo} resTime={resTime} />
-                <button className="contact-host">Contact host</button>
+                <Contact />
                 <SvgSecurity />
                 <p className="security-txt">{securityText}</p>
               </div>
             </div>
           </div>
-          : null}
-          <hr></hr>
+          }
+
       </div>
     )
   }

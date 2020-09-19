@@ -1,4 +1,7 @@
 import React from 'react';
+import SvgStar from './SvgStar';
+import SvgSuperHostIcon from './SvgSuperHostIcon';
+import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 
 const HostListIcons = ({ hostInfo, reviewCount }) => {
   return (
@@ -6,14 +9,16 @@ const HostListIcons = ({ hostInfo, reviewCount }) => {
       <div className="navbar-nav mr-auto">
         <div>
           <li className="navbar-item">
-            <p className="nav-li"><img className="icons" src="https://fec-gai-hostprofile.s3-us-west-1.amazonaws.com/icons/star.png" width="27px" height="27px"></img> {reviewCount} Reviews</p>
+            <p className="nav-li">
+            <SvgStar />
+              {reviewCount} Reviews</p>
           </li>
         </div>
 
         {hostInfo.host_identity_verified ?
           <div>
             <li className="navbar-item">
-              <p className="nav-li"><img className="icons" src="https://fec-gai-hostprofile.s3-us-west-1.amazonaws.com/icons/verify.png" width="27px" height="27px"></img> Identity verified</p>
+              <p className="nav-li"><VerifiedUserIcon style={{"color": "rgb(255,90,95)", "width": "25px", "height": "25px"}} /> Identity verified</p>
             </li>
           </div>
           : null}
@@ -21,7 +26,9 @@ const HostListIcons = ({ hostInfo, reviewCount }) => {
         {hostInfo.host_is_superHost ?
           <div>
             <li className="navbar-item">
-              <p className="nav-li"><img className="icons" src="https://fec-gai-hostprofile.s3-us-west-1.amazonaws.com/icons/superhost.png" width="27px" height="27px"></img>  Superhost</p>
+              <p className="nav-li">
+              <SvgSuperHostIcon />
+                Superhost</p>
             </li>
           </div>
           : null}
