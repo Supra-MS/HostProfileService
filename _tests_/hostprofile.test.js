@@ -16,7 +16,7 @@ import ReadMoreReact from 'read-more-react';
 import { configure, shallow, mount } from 'enzyme';
 import EnzymeAdapter from 'enzyme-adapter-react-16';
 import renderer, { act } from 'react-test-renderer';
-let hostInfo = require('./data/hostInfoData');
+let { hostInfo, coHostPic } = require('./data/hostInfoData');
 
 configure({
   adapter: new EnzymeAdapter(),
@@ -107,17 +107,23 @@ describe("Test Host Profile sub-components: ", () => {
     const component = renderer.create(<HostIcons hostInfo={hostInfo} />);
     let instance = component.root;
     let instance1 = component.toJSON();
-    expect(instance.findAllByType('img').length).toBe(3);
-    expect(instance1.children[0].children[0].children[0].children[0].children[0].props.src).toEqual('https://fec-gai-hostprofile.s3-us-west-1.amazonaws.com/icons/star.png');
+    expect(instance.findAllByType('img').length).toBe(0); // changed to svg
     done();
   });
 
-  it("Check whether the <HostListIcons> component retrieves image src from s3", (done) => {
-    const component = renderer.create(<HostIcons hostInfo={hostInfo} />);
+  it("Check whether the <CoHost> component retrieves image src from s3", (done) => {
+    const component = renderer.create(<CoHost hostInfo={hostInfo} coHostPic={coHostPic} />);
     let instance = component.root;
     let instance1 = component.toJSON();
-    expect(instance.findAllByType('img').length).toBe(3);
-    expect(instance1.children[0].children[0].children[0].children[0].children[0].props.src).toEqual('https://fec-gai-hostprofile.s3-us-west-1.amazonaws.com/icons/star.png');
+    expect(instance.findAllByType('img').length).toBe(1);
+    console.log(instance1.children[0].children[1])
+    expect(instance1.children[0].children[1].props.src).toEqual('https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjE2NjUwNn0');
+    done();
+  });
+
+  it("Check the innerText in <CoHost> component", (done) => {
+    const wrapper = shallow(<CoHost hostInfo={hostInfo} />);
+    expect(wrapper.text()).toEqual('Co-hosts');
     done();
   });
 
