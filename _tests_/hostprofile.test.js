@@ -13,7 +13,7 @@ import CoHost from '../client/src/components/CoHost';
 import SuperHost from '../client/src/components/SuperHost';
 import SvgSecurity from '../client/src/components/SvgSecurity';
 import ReadMoreReact from 'read-more-react';
-import { configure, shallow, mount } from 'enzyme';
+import { configure, shallow } from 'enzyme';
 import EnzymeAdapter from 'enzyme-adapter-react-16';
 import renderer, { act } from 'react-test-renderer';
 let { hostInfo, coHostPic } = require('./data/hostInfoData');

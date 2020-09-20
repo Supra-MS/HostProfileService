@@ -75,14 +75,12 @@
     "randomatic": "^3.1.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "read-more-react": "^1.0.10",
-    "sinon": "^9.0.3"
+    "read-more-react": "^1.0.10"
   },
   "babel": {
     "presets": [
       "@babel/preset-env",
       "@babel/preset-react"
     ]
-  },
-  "proxy": "http://localhost:3000"
+  }
 }
