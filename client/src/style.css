@@ -242,3 +242,10 @@ img.icons {
   margin: 1rem 2px;
   outline: none;
 }
+
+ul.title-ul {
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+  font-size: large;
+}
