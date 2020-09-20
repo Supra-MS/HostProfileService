@@ -1,7 +1,7 @@
+const { MONGO_CLOUD_USERNAME, MONGO_CLOUD_PASSWORD, DB_NAME } = require('../../config/config');
 const mongoose = require('mongoose');
-const mongoUri = 'mongodb://localhost/hostInfo';
-const dbName = 'hostProfileDB';
-// const mongoUri = `mongodb+srv://admin:admin@cluster0.9j0yc.mongodb.net/${dbName}`;
+// const mongoUri = 'mongodb://localhost/hostInfo';
+const mongoUri = `mongodb+srv://${MONGO_CLOUD_USERNAME}:${MONGO_CLOUD_PASSWORD}@cluster0.9j0yc.mongodb.net/${DB_NAME}`;
 
 const db = mongoose.connect(mongoUri, {
   useNewUrlParser: true,
