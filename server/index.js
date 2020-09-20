@@ -14,10 +14,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(__dirname + '/../client/dist'));
 
+app.get('*.js', function (req, res, next) {
+  req.url = req.url + '.gz';
+  res.set('Content-Encoding', 'gzip');
+  next();
+});
+
 /* match the ui router */
 app.get('/:id', (req, res) => {
   res.sendFile(path.join(__dirname + './../client/dist/index.html'));
 });
+
 
 app.get('/hostInfo', (req, res) => {
   HostProfile.find({})

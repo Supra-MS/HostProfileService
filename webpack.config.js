@@ -1,6 +1,7 @@
 let path = require('path');
 let fs = require('fs');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
+let CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
   entry: './client/src/index.js',
@@ -34,6 +35,12 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './client/src/index.html'
+    }),
+    new CompressionPlugin({
+      algorithm: "gzip",
+      test: /\.js$|\.css$|\.html$/,
+      threshold: 10240,
+      minRatio: Number.MAX_SAFE_INTEGER
     })
-  ]
+  ],
 }
