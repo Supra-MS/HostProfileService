@@ -1,6 +1,8 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const compression = require('compression');
+var expressStaticGzip = require("express-static-gzip");
 const cors = require('cors');
 
 const HostProfile = require('./db/models/hostProfile');
@@ -8,19 +10,24 @@ const HostProfile = require('./db/models/hostProfile');
 const app = express();
 
 app.use(cors());
+app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use(express.static(__dirname + '/../client/dist'));
 
 app.get('*.js', function (req, res, next) {
   req.url = req.url + '.gz';
   res.set('Content-Encoding', 'gzip');
+  res.set('Content-Type', 'text/javascript');
   next();
 });
 
+app.use(expressStaticGzip(path.join(__dirname, '/../client/dist')));
+
+app.use(express.static(__dirname + '/../client/dist'));
+
 /* match the ui router */
 app.get('/:id', (req, res) => {
+  console.log('test :id')
   res.sendFile(path.join(__dirname + './../client/dist/index.html'));
 });
 
@@ -37,13 +44,14 @@ app.get('/hostInfo', (req, res) => {
 });
 
 app.get('/hostInfo/:hostId', (req, res) => {
+  console.log('test hostid:id')
   console.log('Parameter send by id in the req: ', req.params.hostId)
   HostProfile.findById(req.params.hostId)
     .then(data => {
       if (!data) {
         res.status(404).send({ message: 'Unable to find the Host profile by id' })
       } else {
-        console.log('Host profile by id Data: ', data);
+        console.log('Host profile by id Data: ', req.url);
         res.send(data);
       }
     })

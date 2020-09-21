@@ -1,5 +1,4 @@
 let path = require('path');
-let fs = require('fs');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
 let CompressionPlugin = require('compression-webpack-plugin');
 
@@ -27,6 +26,7 @@ module.exports = {
       { test: /\.(css)$/, use: ['style-loader', 'css-loader'] }
     ]
   },
+  devtool: 'inline-source-map',
   target: "node",
   devServer: {
     historyApiFallback: true
@@ -34,13 +34,19 @@ module.exports = {
   mode: 'development',
   plugins: [
     new HtmlWebpackPlugin({
-      template: './client/src/index.html'
+      template: './client/src/index.html',
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true
+      }
     }),
     new CompressionPlugin({
+      filename: "[path][base].gz",
       algorithm: "gzip",
-      test: /\.js$|\.css$|\.html$/,
+      test: /\.js$|\.css$|\.html$|\.eot?.+$|\.ttf?.+$|\.woff?.+$|\.svg?.+$/,
       threshold: 10240,
-      minRatio: Number.MAX_SAFE_INTEGER
+      minRatio: 0.8
     })
   ],
 }
