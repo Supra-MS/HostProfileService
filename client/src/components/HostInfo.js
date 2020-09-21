@@ -104,7 +104,7 @@ class HostInfo extends React.Component {
     return (
       <div>
       <hr></hr>
-        {(hostInfo.host_languages) &&
+        {(hostInfo.host_languages) ?
           <div>
             <HostTitle hostInfo={hostInfo} hostPic={hostPic} />
             <div className="list row">
@@ -130,7 +130,7 @@ class HostInfo extends React.Component {
               </div>
             </div>
           </div>
-          }
+          : <p>Host profile loading...</p>}
 
       </div>
     )
