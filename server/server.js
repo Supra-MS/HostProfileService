@@ -25,12 +25,6 @@ app.use(expressStaticGzip(path.join(__dirname, '/../client/dist')));
 
 app.use(express.static(__dirname + '/../client/dist'));
 
-/* match the ui router */
-// app.get('/:id', (req, res) => {
-//   console.log('test :id')
-//   res.sendFile(path.join(__dirname + './../client/dist/index.html'));
-// });
-
 app.get('/hostInfo', (req, res) => {
   HostProfile.find({})
     .then(data => {
