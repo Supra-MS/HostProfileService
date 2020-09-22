@@ -6,9 +6,9 @@
   "scripts": {
     "test": "jest --watch",
     "start": "nodemon server/index.js",
-    "dev:react": "webpack --watch",
-    "react": "webpack-dev-server --open=8081",
-    "seedDb": "node ./server/db/seed.js",
+    "build": "webpack --watch",
+    "dev:build": "webpack-dev-server --open=8081",
+    "seed": "node ./server/db/seed.js",
     "dev:json": "json-server ./server/helpers/hostProfile.json"
   },
   "jest": {

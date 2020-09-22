@@ -45,7 +45,11 @@ $ npm start
 
 To build the client,
 ```
-$ npm run dev:react
+$ npm run build
+
+or
+
+$ npm run dev:build
 ```
 
 To run the tests,
