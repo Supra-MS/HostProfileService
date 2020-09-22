@@ -1,8 +1,9 @@
 const express = require('express');
+const responseTime = require('response-time');
 const path = require('path');
 const bodyParser = require('body-parser');
 const compression = require('compression');
-var expressStaticGzip = require("express-static-gzip");
+const expressStaticGzip = require("express-static-gzip");
 const cors = require('cors');
 
 const HostProfile = require('./db/models/hostProfile');
@@ -13,6 +14,7 @@ app.use(cors());
 app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(responseTime());
 
 app.get('*.js', function (req, res, next) {
   req.url = req.url + '.gz';

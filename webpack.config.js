@@ -1,38 +1,47 @@
-let path = require('path');
-let HtmlWebpackPlugin = require('html-webpack-plugin');
-let CompressionPlugin = require('compression-webpack-plugin');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const TerserJSPlugin = require('terser-webpack-plugin');
 
 module.exports = {
+  mode: 'production',
   entry: './client/src/index.js',
   output: {
     path: path.resolve(__dirname, './client/dist'),
-    filename: 'bundle.js',
+    filename: 'bundle.[contentHash].js',
     publicPath: '/'
   },
   module: {
     rules: [
       {
+
         test: /\.(png|jp(e*)g|svg|gif)$/,
         use: [
           {
             loader: 'file-loader',
             options: {
-              name: 'images/[hash]-[name].[ext]',
+              name: '[name].[hash].[ext]',
+              outputPath: "imgs"
             },
           },
         ],
       },
       { test: /\.(js)$/, use: 'babel-loader' },
-      { test: /\.(css)$/, use: ['style-loader', 'css-loader'] }
+      { test: /\.(css)$/, use: [MiniCssExtractPlugin.loader, 'css-loader'] }
     ]
   },
-  devtool: 'inline-source-map',
-  target: "node",
+  devtool: 'source-map',
   devServer: {
     historyApiFallback: true
   },
-  mode: 'development',
   plugins: [
+    new MiniCssExtractPlugin({
+      filename: "[name].[contentHash].css"
+    }),
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: './client/src/index.html',
       minify: {
@@ -49,4 +58,10 @@ module.exports = {
       minRatio: 0.8
     })
   ],
+  optimization: {
+    minimizer: [
+      new OptimizeCssAssetsPlugin(),
+      new TerserJSPlugin(),
+    ]
+  },
 }
