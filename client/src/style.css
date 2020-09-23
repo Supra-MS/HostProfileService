@@ -139,37 +139,37 @@ img.icons {
 };
 
 .social-auth {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: white;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  background-color: white !important;
 }
 
 .continue-btn {
-  background-color: rgb(255,90,95);
-  font-size: medium;
-  border: none;
+  background-color: rgb(255,90,95) !important;
+  font-size: medium !important;
+  border: none !important;
 }
 
 .continue-btn:hover {
-  background-color: rgb(255,90,95);
-  font-size: medium;
-  color: #f5f1f1;
-  border: none;
+  background-color: rgb(255,90,95) !important;
+  font-size: medium !important;
+  color: #f5f1f1 !important;
+  border: none !important;
 }
 
 .social-btn {
-  background-color: white;
-  font-size: medium;
-  border: none;
-  color: black;
+  background-color: white !important;
+  font-size: medium !important;
+  border: none !important;
+  color: black !important;
 }
 
 .social-btn:hover {
-  background-color: white;
-  font-size: medium;
-  color: black;
-  border: none;
+  background-color: white !important;
+  font-size: medium !important;
+  color: black !important;
+  border: none !important;
 }
 
 .modal-p {
@@ -205,23 +205,23 @@ img.icons {
 }
 
 .txt-container {
-  max-width: 100%;
-  display: flex;
-  flex: 1;
-  padding: 8px;
-  align-items: center;
-  border: 2px solid #cdcdcd;
-  border-radius: 10px;
-  margin: 15px;
+  max-width: 100% !important;
+  display: flex !important;
+  flex: 1 !important;
+  padding: 8px !important;
+  align-items: center !important;
+  border: 2px solid #cdcdcd !important;
+  border-radius: 10px !important;
+  margin: 15px !important;
 }
 
 .txt-container:hover {
-  background-color: white;
-  font-size: medium;
-  color: black;
-  border: 2px solid black;
-  border-radius: 10px;
-  margin: 15px;
+  background-color: white !important;
+  font-size: medium !important;
+  color: black !important;
+  border: 2px solid black !important;
+  border-radius: 10px !important;
+  margin: 15px !important;
 }
 
 .fb {
