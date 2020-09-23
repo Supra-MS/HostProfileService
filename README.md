@@ -35,7 +35,7 @@ Requires Node 12.13.1^ & npm 6.12.1^ to run.
 
 First seed the db using,
 ```
-$ npm run seedDb
+$ npm run seed
 ```
 
 To run  the server,
