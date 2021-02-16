@@ -1,5 +1,8 @@
 ## FEC Project: AirBnB Product detail clone page
+---
+![](hostProfileService-AWS.gif)
 
+---
 > Host profile service built based on MERN stack.
 
 Runs the app in development mode.
