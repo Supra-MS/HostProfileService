@@ -40,11 +40,11 @@ app.get('/hostInfo', (req, res) => {
 });
 
 app.get('/hostInfo/:hostId', (req, res) => {
-  console.log('test hostid:id')
   console.log('Parameter send by id in the req: ', req.params.hostId)
   HostProfile.findById(req.params.hostId)
     .then(data => {
       if (!data) {
+        console.log('chec', data)
         res.status(404).send({ message: 'Unable to find the Host profile by id' })
       } else {
         console.log('Host profile by id Data: ', req.url);

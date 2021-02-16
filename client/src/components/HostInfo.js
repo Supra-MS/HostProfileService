@@ -25,20 +25,21 @@ class HostInfo extends React.Component {
       coHostPic: '',
     }
     this.getHostInfoById = this.getHostInfoById.bind(this);
-    this.getReviewCount = this.getReviewCount.bind(this);
+    // this.getReviewCount = this.getReviewCount.bind(this);
   }
 
   componentDidMount() {
     let queryString = window.location.search;
+    console.log(queryString);
     if (!queryString.length) {
       let pathname = window.location.pathname.split('/').pop();
       if (pathname === undefined || pathname === 'blank') {
         this.getHostInfoById(1);
-        this.getProfilePicture(1);
+        // this.getProfilePicture(1);
       } else {
         this.getHostInfoById(pathname);
-        this.getReviewCount(pathname);
-        this.getProfilePicture(pathname);
+        // this.getReviewCount(pathname);
+        // this.getProfilePicture(pathname);
         this.setState({
           id: Number(pathname)
         });
@@ -46,44 +47,44 @@ class HostInfo extends React.Component {
     } else {
       let queryStringRes = queryString.split('?').pop();
       this.getHostInfoById(queryStringRes);
-      this.getReviewCount(queryStringRes);
-      this.getProfilePicture(queryStringRes);
+      // this.getReviewCount(queryStringRes);
+      // this.getProfilePicture(queryStringRes);
       this.setState({
         id: Number(queryStringRes)
       });
     }
   }
 
-  getReviewCount(id) {
-    http.get('https://fec-gai-hostprofile.s3-us-west-1.amazonaws.com/json/reviews.json')
-      .then(response => {
-          let reviewCount = response.data.filter((ele, i, self) => {
-            return ele.id === Number(id)
-          });
-          this.setState({
-            reviewCount: reviewCount[0].review_count
-          });
-      })
-      .catch(err => {
-        console.log('Error receiving review counts from AWS s3: ');
-      });
-  }
+  // getReviewCount(id) {
+  //   http.get('https://fec-gai-hostprofile.s3-us-west-1.amazonaws.com/json/reviews.json')
+  //     .then(response => {
+  //         let reviewCount = response.data.filter((ele, i, self) => {
+  //           return ele.id === Number(id)
+  //         });
+  //         this.setState({
+  //           reviewCount: reviewCount[0].review_count
+  //         });
+  //     })
+  //     .catch(err => {
+  //       console.log('Error receiving review counts from AWS s3: ');
+  //     });
+  // }
 
-  getProfilePicture(id) {
-    http.get('https://fec-gai-hostprofile.s3-us-west-1.amazonaws.com/json/images.json')
-      .then(response => {
-          let pictures = response.data.filter((ele, i, self) => {
-            return ele.room_id === Number(id)
-          });
-          this.setState({
-            hostPic: pictures[0].host_image,
-            coHostPic: pictures[0].reviewers[0],
-          });
-      })
-      .catch(err => {
-        console.log('Error receiving profile pictures from AWS s3: ');
-      });
-  }
+  // getProfilePicture(id) {
+  //   http.get('https://fec-gai-hostprofile.s3-us-west-1.amazonaws.com/json/images.json')
+  //     .then(response => {
+  //         let pictures = response.data.filter((ele, i, self) => {
+  //           return ele.room_id === Number(id)
+  //         });
+  //         this.setState({
+  //           hostPic: pictures[0].host_image,
+  //           coHostPic: pictures[0].reviewers[0],
+  //         });
+  //     })
+  //     .catch(err => {
+  //       console.log('Error receiving profile pictures from AWS s3: ');
+  //     });
+  // }
 
   getHostInfoById(id) {
     http.get(`${serverUrl}/hostInfo/${id}`)
